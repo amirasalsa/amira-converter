@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>AmiraCantik</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>AmiraCantik</h1>
+    <div class="mode">
+        <button id="clockMode">Jam Biasa</button>
+        <button id="timerMode">Timer</button>
+        <button id="stopwatchMode">Stopwatch</button>
+    </div>
+
+    <div id="display">--:--:--</div>
+
+    <div id="timerControls" style="display: none;">
+        <input type="number" id="timerMinutes" placeholder="Menit"> 
+        <button id="startTimer">Mulai Timer</button>
+        <button id="resetTimer">Reset Timer</button>
+    </div>
+
+    <div id="stopwatchControls" style="display: none;">
+        <button id="startStopwatch">Mulai</button>
+        <button id="stopStopwatch">Berhenti</button>
+        <button id="resetStopwatch">Reset</button>
+    </div>
+</body>
+</html>
