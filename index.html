@@ -1,32 +1,164 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AmiraCantik</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amira Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AmiraCantik</h1>
-    <div class="mode">
-        <button id="clockMode">Jam Biasa</button>
-        <button id="timerMode">Timer</button>
-        <button id="stopwatchMode">Stopwatch</button>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5A6473;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Amira Converter</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#temperature">Suhu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#length">Panjang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#weight">Berat</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <!-- Temperature Converter -->
+        <div class="card inputSection col-12 col-md-8 mx-auto mb-4" id="temperature">
+            <div class="card-body">
+                <form onsubmit="event.preventDefault(); convertTemperature();">
+                    <div class="row px-3">
+                        <div class="col-12 px-4">
+                            <span class="card-title d-block mb-2">Konversi Suhu</span>
+
+                            <label for="tempInput" class="py-sm-2">Nilai Suhu</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="tempInput" placeholder="Masukkan nilai" />
+                                <select class="form-select" id="tempFrom">
+                                    <option value="C">&deg;C</option>
+                                    <option value="F">&deg;F</option>
+                                    <option value="R">R</option>
+                                </select>
+                            </div>
+
+                            <label for="tempTo" class="py-sm-2">Konversi Ke</label>
+                            <div class="input-group mb-3">
+                                <select class="form-select" id="tempTo">
+                                    <option value="C">Celsius (&deg;C)</option>
+                                    <option value="F">Fahrenheit (&deg;F)</option>
+                                    <option value="R">Reamur (R)</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="convertBtn btn btn-lg w-100 rounded-pill text-white d-flex justify-content-center align-items-center">
+                                Konversi &nbsp;
+                                <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 21.367 20.826">
+                                    <path d="M9.085,4.042l1.059-1.059a1.14,1.14,0,0,1,1.617,0l9.271,9.266a1.14,1.14,0,0,1,0,1.617L11.76,23.137a1.14,1.14,0,0,1-1.617,0L9.085,22.078A1.146,1.146,0,0,1,9.1,20.443l5.747-5.475H1.145A1.142,1.142,0,0,1,0,13.823V12.3a1.142,1.142,0,0,1,1.145-1.145H14.85L9.1,5.678A1.138,1.138,0,0,1,9.085,4.042Z" transform="translate(0 -2.647)" fill="#fff"/>
+                                </svg>
+                            </button>
+
+                            <div class="alert alert-light mt-4 text-center fw-bold" id="tempResult">Hasil konversi akan tampil di sini</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Length Converter -->
+        <div class="card inputSection col-12 col-md-8 mx-auto mb-4" id="length">
+            <div class="card-body">
+                <form onsubmit="event.preventDefault(); convertLength();">
+                    <div class="row px-3">
+                        <div class="col-12 px-4">
+                            <span class="card-title d-block mb-2">Konversi Panjang</span>
+
+                            <label for="lengthInput" class="py-sm-2">Nilai Panjang</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="lengthInput" placeholder="Masukkan nilai" />
+                                <select class="form-select" id="lengthFrom">
+                                    <option value="km">Kilometer (km)</option>
+                                    <option value="m">Meter (m)</option>
+                                    <option value="cm">Centimeter (cm)</option>
+                                    <option value="mm">Millimeter (mm)</option>
+                                    <option value="mile">Mile</option>
+                                </select>
+                            </div>
+
+                            <label for="lengthTo" class="py-sm-2">Konversi Ke</label>
+                            <div class="input-group mb-3">
+                                <select class="form-select" id="lengthTo">
+                                    <option value="km">Kilometer (km)</option>
+                                    <option value="m">Meter (m)</option>
+                                    <option value="cm">Centimeter (cm)</option>
+                                    <option value="mm">Millimeter (mm)</option>
+                                    <option value="mile">Mile</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="convertBtn btn btn-lg w-100 rounded-pill text-white d-flex justify-content-center align-items-center">
+                                Konversi &nbsp;
+                                <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 21.367 20.826">
+                                    <path d="M9.085,4.042l1.059-1.059a1.14,1.14,0,0,1,1.617,0l9.271,9.266a1.14,1.14,0,0,1,0,1.617L11.76,23.137a1.14,1.14,0,0,1-1.617,0L9.085,22.078A1.146,1.146,0,0,1,9.1,20.443l5.747-5.475H1.145A1.142,1.142,0,0,1,0,13.823V12.3a1.142,1.142,0,0,1,1.145-1.145H14.85L9.1,5.678A1.138,1.138,0,0,1,9.085,4.042Z" transform="translate(0 -2.647)" fill="#fff"/>
+                                </svg>
+                            </button>
+
+                            <div class="alert alert-light mt-4 text-center fw-bold" id="lengthResult">Hasil konversi akan tampil di sini</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Weight Converter -->
+        <div class="card inputSection col-12 col-md-8 mx-auto mb-4" id="weight">
+            <div class="card-body">
+                <form onsubmit="event.preventDefault(); convertWeight();">
+                    <div class="row px-3">
+                        <div class="col-12 px-4">
+                            <span class="card-title d-block mb-2">Konversi Berat</span>
+
+                            <label for="weightInput" class="py-sm-2">Nilai Berat</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" id="weightInput" placeholder="Masukkan nilai" />
+                                <select class="form-select" id="weightFrom">
+                                    <option value="kg">Kilogram (kg)</option>
+                                    <option value="g">Gram (g)</option>
+                                    <option value="mg">Milligram (mg)</option>
+                                    <option value="ton">Ton</option>
+                                    <option value="oz">Ounce (oz)</option>
+                                </select>
+                            </div>
+
+                            <label for="weightTo" class="py-sm-2">Konversi Ke</label>
+                            <div class="input-group mb-3">
+                                <select class="form-select" id="weightTo">
+                                    <option value="kg">Kilogram (kg)</option>
+                                    <option value="g">Gram (g)</option>
+                                    <option value="mg">Milligram (mg)</option>
+                                    <option value="ton">Ton</option>
+                                    <option value="oz">Ounce (oz)</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="convertBtn btn btn-lg w-100 rounded-pill text-white d-flex justify-content-center align-items-center">
+                                Konversi &nbsp;
+                                <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 21.367 20.826">
+                                    <path d="M9.085,4.042l1.059-1.059a1.14,1.14,0,0,1,1.617,0l9.271,9.266a1.14,1.14,0,0,1,0,1.617L11.76,23.137a1.14,1.14,0,0,1-1.617,0L9.085,22.078A1.146,1.146,0,0,1,9.1,20.443l5.747-5.475H1.145A1.142,1.142,0,0,1,0,13.823V12.3a1.142,1.142,0,0,1,1.145-1.145H14.85L9.1,5.678A1.138,1.138,0,0,1,9.085,4.042Z" transform="translate(0 -2.647)" fill="#fff"/>
+                                </svg>
+                            </button>
+
+                            <div class="alert alert-light mt-4 text-center fw-bold" id="weightResult">Hasil konversi akan tampil di sini</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div id="display">--:--:--</div>
-
-    <div id="timerControls" style="display: none;">
-        <input type="number" id="timerMinutes" placeholder="Menit"> 
-        <button id="startTimer">Mulai Timer</button>
-        <button id="resetTimer">Reset Timer</button>
-    </div>
-
-    <div id="stopwatchControls" style="display: none;">
-        <button id="startStopwatch">Mulai</button>
-        <button id="stopStopwatch">Berhenti</button>
-        <button id="resetStopwatch">Reset</button>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
