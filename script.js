@@ -1,91 +1,68 @@
-let mode = 'clock';
-        let timerInterval, stopwatchInterval;
-        let timerRemaining = 0;
-        let stopwatchTime = 0; // dalam 1/10 detik
+// Function to convert temperature
+function convertTemperature() {
+    const input = parseFloat(document.getElementById('tempInput').value);
+    const from = document.getElementById('tempFrom').value;
+    const to = document.getElementById('tempTo').value;
+    let celsius;
+    
+    if (from === 'C') celsius = input;
+    else if (from === 'F') celsius = (input - 32) * 5/9;
+    else if (from === 'R') celsius = input * 5/4;
+    
+    let result;
+    if (to === 'C') result = celsius;
+    else if (to === 'F') result = celsius * 9/5 + 32;
+    else if (to === 'R') result = celsius * 4/5;
+    
+    document.getElementById('tempResult').innerText = result.toFixed(2);
+}
 
-        function updateClock() {
-            if (mode !== 'clock') return;
-            const now = new Date();
-            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-            const gmt7 = new Date(utc + 7 * 3600000);
-            const time = gmt7.toLocaleTimeString();
-            $('#display').text(time);
-        }
+// Function to convert length
+function convertLength() {
+    const input = parseFloat(document.getElementById('lengthInput').value);
+    const from = document.getElementById('lengthFrom').value;
+    const to = document.getElementById('lengthTo').value;
+    let meters;
 
-        function startTimer() {
-            timerRemaining = parseInt($('#timerMinutes').val()) * 60;
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                if (timerRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    alert('Timer selesai!');
-                    return;
-                }
-                timerRemaining--;
-                const mins = Math.floor(timerRemaining / 60).toString().padStart(2, '0');
-                const secs = (timerRemaining % 60).toString().padStart(2, '0');
-                $('#display').text(`${mins}:${secs}`);
-            }, 1000);
-        }
+    // Convert to meters first
+    if (from === 'km') meters = input * 1000;
+    else if (from === 'm') meters = input;
+    else if (from === 'cm') meters = input / 100;
+    else if (from === 'mm') meters = input / 1000;
+    else if (from === 'mile') meters = input * 1609.34;
 
-        function startStopwatch() {
-            clearInterval(stopwatchInterval);
-            stopwatchInterval = setInterval(() => {
-                stopwatchTime += 10; // naik setiap 10ms
-                const totalSeconds = Math.floor(stopwatchTime / 1000);
-                const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-                const secs = (totalSeconds % 60).toString().padStart(2, '0');
-                const millis = Math.floor((stopwatchTime % 1000) / 10).toString().padStart(2, '0');
-                $('#display').text(`${mins}:${secs}.${millis}`);
-            }, 10);
-        }
+    let result;
+    // Convert meters to desired unit
+    if (to === 'km') result = meters / 1000;
+    else if (to === 'm') result = meters;
+    else if (to === 'cm') result = meters * 100;
+    else if (to === 'mm') result = meters * 1000;
+    else if (to === 'mile') result = meters / 1609.34;
 
-        function stopStopwatch() {
-            clearInterval(stopwatchInterval);
-        }
+    document.getElementById('lengthResult').innerText = result.toFixed(2);
+}
 
-        function resetStopwatch() {
-            stopwatchTime = 0;
-            $('#display').text(`00:00.00`);
-        }
+// Function to convert weight
+function convertWeight() {
+    const input = parseFloat(document.getElementById('weightInput').value);
+    const from = document.getElementById('weightFrom').value;
+    const to = document.getElementById('weightTo').value;
+    let grams;
 
-        $(document).ready(function() {
-            $('#clockMode').click(() => {
-                mode = 'clock';
-                clearInterval(timerInterval);
-                clearInterval(stopwatchInterval);
-                $('#timerControls, #stopwatchControls').hide();
-                updateClock();
-            });
+    // Convert to grams first
+    if (from === 'kg') grams = input * 1000;
+    else if (from === 'g') grams = input;
+    else if (from === 'mg') grams = input / 1000;
+    else if (from === 'ton') grams = input * 1000000;
+    else if (from === 'oz') grams = input * 28.3495;
 
-            $('#timerMode').click(() => {
-                mode = 'timer';
-                clearInterval(timerInterval);
-                clearInterval(stopwatchInterval);
-                $('#stopwatchControls').hide();
-                $('#timerControls').show();
-                $('#display').text(`00:00`);
-            });
+    let result;
+    // Convert grams to desired unit
+    if (to === 'kg') result = grams / 1000;
+    else if (to === 'g') result = grams;
+    else if (to === 'mg') result = grams * 1000;
+    else if (to === 'ton') result = grams / 1000000;
+    else if (to === 'oz') result = grams / 28.3495;
 
-            $('#stopwatchMode').click(() => {
-                mode = 'stopwatch';
-                clearInterval(timerInterval);
-                clearInterval(stopwatchInterval);
-                $('#timerControls').hide();
-                $('#stopwatchControls').show();
-                $('#display').text(`00:00.00`);
-            });
-
-            $('#startTimer').click(startTimer);
-            $('#resetTimer').click(() => {
-                clearInterval(timerInterval);
-                $('#display').text(`00:00`);
-            });
-
-            $('#startStopwatch').click(startStopwatch);
-            $('#stopStopwatch').click(stopStopwatch);
-            $('#resetStopwatch').click(resetStopwatch);
-
-            setInterval(updateClock, 1000);
-            updateClock();
-        });
+    document.getElementById('weightResult').innerText = result.toFixed(2);
+}
