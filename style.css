@@ -106,7 +106,7 @@ nav.navbar {
 
 .navbar .container-fluid {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -402,6 +402,12 @@ label {
 }
 
 @media (max-width: 768px) {
+    .navbar-nav {
+        justify-content: flex-end;
+    }
+    .navbar-collapse {
+        text-align: right; 
+    }
     .cursor, .cursor-follower {
         display: none; 
     }
