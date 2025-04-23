@@ -405,6 +405,9 @@ label {
     .navbar-nav {
         justify-content: flex-end;
     }
+    .nav-link:after {
+        display: none; /* Remove the underline effect on mobile */
+    }
     .navbar-collapse {
         text-align: right; 
     }
