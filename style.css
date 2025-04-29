@@ -50,6 +50,11 @@ body:before {
     box-shadow: 0 0 10px rgba(230, 168, 255, 0.7); 
 }
 
+.custom-navbar {
+    background-color: #5A6473 !important;
+}
+
+
 .cursor-follower {
     position: fixed;
     width: 36px;
@@ -422,4 +427,26 @@ label {
     .navbar-nav:before {
         display: none;
     }
+}
+.form-control,
+.form-select {
+    color: #ffffff !important;
+    background-color: rgba(43, 46, 59, 0.8) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    color: #ffffff !important;
+    background-color: rgba(43, 46, 59, 0.9) !important;
+}
+
+input::placeholder {
+    color: #ccc !important;
+    opacity: 1;
+}
+
+input:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
