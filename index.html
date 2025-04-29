@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5A6473;">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Amira Converter</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -27,7 +27,7 @@
     <div class="container py-4">
         <div class="card inputSection col-12 col-md-8 mx-auto mb-4" id="temperature">
             <div class="card-body">
-                <form onsubmit="event.preventDefault(); convertTemperature();">
+                <form id="tempForm">
                     <div class="row px-3">
                         <div class="col-12 px-4">
                             <span class="card-title d-block mb-2">Konversi Suhu</span>
@@ -67,7 +67,7 @@
 
         <div class="card inputSection col-12 col-md-8 mx-auto mb-4" id="length">
             <div class="card-body">
-                <form onsubmit="event.preventDefault(); convertLength();">
+                <form id="lengthForm">
                     <div class="row px-3">
                         <div class="col-12 px-4">
                             <span class="card-title d-block mb-2">Konversi Panjang</span>
@@ -111,7 +111,7 @@
 
         <div class="card inputSection col-12 col-md-8 mx-auto mb-4" id="weight">
             <div class="card-body">
-                <form onsubmit="event.preventDefault(); convertWeight();">
+                <form id="weightForm">
                     <div class="row px-3">
                         <div class="col-12 px-4">
                             <span class="card-title d-block mb-2">Konversi Berat</span>
