@@ -1,3 +1,18 @@
+document.getElementById('tempForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    convertTemperature();
+});
+
+document.getElementById('lengthForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    convertLength();
+});
+
+document.getElementById('weightForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    convertWeight();
+});
+
 function convertTemperature() {
     const input = parseFloat(document.getElementById('tempInput').value);
     const from = document.getElementById('tempFrom').value;
